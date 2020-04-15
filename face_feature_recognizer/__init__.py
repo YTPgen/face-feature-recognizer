@@ -1,0 +1,1 @@
+from face_feature_recognizer.face_feature_recognizer import FaceFeatureRecognizer
