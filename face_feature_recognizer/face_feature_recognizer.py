@@ -1,5 +1,6 @@
 import face_recognition as fr
 import numpy
+from face_feature_recognizer.face import Face
 
 
 class FaceFeatureRecognizer(object):
@@ -40,3 +41,16 @@ class FaceFeatureRecognizer(object):
         """
 
         return ((face[1] + face[3]) / 2, (face[0] + face[2]) / 2)
+
+    @staticmethod
+    def find_faces(image: numpy.ndarray) -> list:
+        """Finds information about all faces in an image.
+
+        Args:
+            image (numpy.ndarray): Image
+
+        Returns:
+            list: Face objects with facial feature information
+        """
+        landmarks = fr.face_landmarks(image)
+        return [Face(l) for l in landmarks]

@@ -1,0 +1,10 @@
+# Python
+*__pycache__
+
+# Test files
+*.jpg
+*.png
+*.mp4
+
+# Editors
+.vscode
