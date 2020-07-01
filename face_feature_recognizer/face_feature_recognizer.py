@@ -1,5 +1,6 @@
-import face_recognition as fr
 import numpy
+from typing import List
+import face_recognition as fr
 from face_feature_recognizer.face import Face
 
 
@@ -19,6 +20,24 @@ class FaceFeatureRecognizer(object):
         """
 
         return fr.face_locations(image)
+
+    @staticmethod
+    def batch_face_locations(images: List[numpy.ndarray], batch_size=128):
+        """Finds all face locations in a list of images through batch processing
+
+        Args:
+            images (List[numpy.ndarray]): List of images
+
+        Returns:
+            List[tuple]: Face boxes (top, right, bottom, left) 
+        """
+        if batch_size < 1:
+            raise ValueError
+        face_locations = fr.batch_face_locations(
+            images, number_of_times_to_upsample=0, batch_size=batch_size
+        )
+        assert len(face_locations) == len(images)
+        return face_locations
 
     @staticmethod
     def load_image(path: str) -> numpy.ndarray:
